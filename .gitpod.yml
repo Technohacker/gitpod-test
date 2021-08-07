@@ -3,12 +3,17 @@ image:
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
+  - name: MySQL Server
+    init: |
+      mysql -e "create user 'testuser'@'localhost' identified by 'testpassword';"
+      mysql -e "grant all on testdb.* to 'testuser'@'localhost';"
+      gp sync-done db-ready
   - name: Java Build
     init: |
+      gp sync-await db-ready
       cd java
       ./gradlew dependencies --refresh-dependencies
     command: |
-      cd java
       gp sync-done java-build
       ./gradlew -t build
   - name: Java Server
