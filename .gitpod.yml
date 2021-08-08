@@ -1,3 +1,4 @@
+
 image:
   file: .gitpod.Dockerfile
 
@@ -21,7 +22,7 @@ tasks:
     command: |
       cd java
       ./gradlew bootRun
-  
+
   - name: Angular
     init: |
       cd angular
@@ -35,3 +36,11 @@ ports:
     onOpen: ignore
   - port: 4200
     onOpen: open-preview
+
+vscode:
+  extensions:
+    - eamodio.gitlens
+    - mtxr.sqltools
+    - mtxr.sqltools-driver-mysql
+    - pivotal.vscode-boot-dev-pack
+    - angular.ng-template
