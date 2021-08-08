@@ -1,0 +1,21 @@
+databaseChangeLog:
+- changeSet:
+    id: 1628413707022-1
+    author: gitpod (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: user_id
+            type: VARCHAR(20)
+        - column:
+            name: first_name
+            type: VARCHAR(20)
+        - column:
+            name: last_name
+            type: VARCHAR(20)
+        tableName: EXAMPLE_TABLE
+

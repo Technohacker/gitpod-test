@@ -23,8 +23,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-configurations {
-	liquibaseRuntime.extendsFrom runtime
+configurations.liquibaseRuntime.extendsFrom configurations.runtimeClasspath
+
+liquibase {
+    activities {
+        main {
+            changeLogFile "$projectDir/src/main/resources/db/changelog/db.changelog-master.yaml"
+            url 'jdbc:mariadb://localhost:3306/testdb'
+            username 'testuser'
+            password 'testpassword'
+        }
+    }
 }
 
 test {
