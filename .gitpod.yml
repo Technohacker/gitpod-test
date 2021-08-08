@@ -6,6 +6,7 @@ image:
 tasks:
   - name: MySQL Server
     init: |
+      gp await-port 3306
       mysql -e "create database testdb;"
       mysql -e "create user 'testuser'@'localhost' identified by 'testpassword';"
       mysql -e "grant all on testdb.* to 'testuser'@'localhost';"
