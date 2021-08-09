@@ -2,7 +2,7 @@ import { trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { switchMapTo } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,14 @@ import { switchMapTo } from "rxjs/operators";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular';
-  trigger = new Subject();
+  field = "";
+  trigger = new Subject<string>();
   value: Observable<any> = this.trigger.pipe(
-    switchMapTo(this.http.get("/api/")),
+    switchMap(userID => this.http.get("/api/", {
+      params: {
+        userID,
+      }
+    })),
   );
 
   constructor(
@@ -21,6 +25,6 @@ export class AppComponent {
   ) {}
 
   makeRequest() {
-    this.trigger.next();
+    this.trigger.next(this.field);
   }
 }
